@@ -4,7 +4,7 @@ import { FaBars } from "react-icons/fa6";
 import Dashboardpage from "./Dashboardpage";
 
 function Dashboard(){
-    const [open,setOpen] = useState(true);
+    const [open,setOpen] = useState(false);
 
     return (
         <div>
@@ -31,12 +31,12 @@ function Dashboard(){
                 </div>
             </div>
             <div>
-                <div className="flex justify-end">
+                <div className="flex justify-end lg:hidden">
                     <div className="p-1 border-2 border-black rounded-xl m-2 cursor-pointer" onClick={() => setOpen(true)}>
                         <FaBars className="size-9"/>
                     </div>
                 </div>
-                <div>
+                <div className="flex">
                     <Dashboardpage />
                 </div>
             </div>
