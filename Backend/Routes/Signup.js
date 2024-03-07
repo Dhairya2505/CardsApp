@@ -1,4 +1,4 @@
-const User = require('../Database/Database.js');
+const {User} = require('../Database/Database.js');
 const { Router } = require("express");
 const usernameDuplicacy = require("../Middlewares/UsernameDuplicacy.js");
 

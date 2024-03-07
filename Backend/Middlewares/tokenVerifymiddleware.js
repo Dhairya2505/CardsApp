@@ -16,6 +16,7 @@ function tokenVerifymiddleware(req,res,next){
             })
         }
     } catch (error) {
+        console.log('not a user');
         res.status(401).json({
             msg : false,
         })

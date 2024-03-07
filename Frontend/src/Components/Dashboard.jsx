@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FaBars } from "react-icons/fa6";
-import Dashboardpage from "./Dashboardpage";
+import { useNavigate } from 'react-router-dom'
 
-function Dashboard(){
+function Dashboard({component}){
     const [open,setOpen] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <div>
@@ -21,10 +22,16 @@ function Dashboard(){
                             <RxCross2 className="size-8" onClick={()=>setOpen(false)}/>
                         </div>
                         <div className="absolute top-40 md:left-7 left-3 ">
-                            <div className="md:text-2xl text-xl border-2 border-blue-800 bg-blue-300 m-2 p-2 rounded-lg select-none cursor-pointer md:hover:bg-light-gray3">
+                            <div className="md:text-2xl text-xl border-2 border-blue-800 bg-blue-300 m-2 p-2 rounded-lg select-none cursor-pointer md:hover:bg-light-gray3" onClick={() => {
+                                setOpen(false);
+                                navigate('/dashboard');
+                            }}>
                                 Your Details
                             </div>
-                            <div className="md:text-2xl text-xl border-2 border-blue-800 bg-blue-300 m-2 p-2 rounded-lg select-none cursor-pointer md:hover:bg-light-gray3">
+                            <div className="md:text-2xl text-xl border-2 border-blue-800 bg-blue-300 m-2 p-2 rounded-lg select-none cursor-pointer md:hover:bg-light-gray3" onClick={() => {
+                                setOpen(false);
+                                navigate('/card');
+                            }}>
                                 Your Card
                             </div>
                         </div>
@@ -36,8 +43,8 @@ function Dashboard(){
                         <FaBars className="size-9"/>
                     </div>
                 </div>
-                <div className="flex">
-                    <Dashboardpage />
+                <div className="flex justify-center mt-5">
+                    {component}
                 </div>
             </div>
             

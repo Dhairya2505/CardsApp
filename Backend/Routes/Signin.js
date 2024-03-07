@@ -2,7 +2,7 @@ const { Router } = require("express");
 const usercheck = require('./../Middlewares/Usercheck.js');
 const jwt = require('jsonwebtoken');
 
-const secretKey = "Dhairya@`123456"
+const secretKey = "Dhairya@123456"
 
 const signinRoute = Router();
 

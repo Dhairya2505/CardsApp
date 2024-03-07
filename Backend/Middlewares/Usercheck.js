@@ -1,4 +1,4 @@
-const User = require("../Database/Database.js");
+const { User } = require("../Database/Database.js");
 
 async function usercheck(req,res,next){
     const username = req.body.username;
