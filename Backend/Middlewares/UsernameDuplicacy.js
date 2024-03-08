@@ -1,4 +1,4 @@
-const User = require("./../Database/Database");
+const {User} = require("./../Database/Database");
 
 async function usernameDuplicacy(req,res,next){
     const username = req.body.username;

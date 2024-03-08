@@ -5,13 +5,13 @@ import Card from './Components/Card.jsx';
 import Details from './Components/Details.jsx';
 
 const ProtectedRoute = ({child}) => {
-    const token = localStorage.getItem('CATIT');
-    if(token){
+    const bearerToken = localStorage.getItem('CATIT');
+    if(bearerToken){
       return child;
     }
     else{
       // return <Navigate to='/' />
-      return child; 
+      return child;
     }
 };
 

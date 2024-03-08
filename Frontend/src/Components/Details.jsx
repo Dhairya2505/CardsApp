@@ -15,6 +15,10 @@ export default function Details() {
   const [link1, setlink1] = useState("");
   const [link2, setlink2] = useState("");
   const [error, setError] = useState("");
+  const [github, setGithub] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [twitter, setTwitter] = useState("");
+
 
   const navigate = useNavigate();
 
@@ -160,6 +164,54 @@ export default function Details() {
                 id="education"
                 className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
                 onChange={(e) => setEducation(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="p-1 mb-2">
+            <div>
+              <label htmlFor="education" className="text-xl cursor-pointer">
+                Github Link :{" "}
+              </label>
+            </div>
+            <div>
+              <input
+                type="text"
+                value={github}
+                id="education"
+                className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
+                onChange={(e) => setGithub(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="p-1 mb-2">
+            <div>
+              <label htmlFor="education" className="text-xl cursor-pointer">
+                Twitter Link :{" "}
+              </label>
+            </div>
+            <div>
+              <input
+                type="text"
+                value={twitter}
+                id="education"
+                className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
+                onChange={(e) => setTwitter(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="p-1 mb-2">
+            <div>
+              <label htmlFor="education" className="text-xl cursor-pointer">
+                Linkedin Link :{" "}
+              </label>
+            </div>
+            <div>
+              <input
+                type="text"
+                value={linkedin}
+                id="education"
+                className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
+                onChange={(e) => setLinkedin(e.target.value)}
               />
             </div>
           </div>
