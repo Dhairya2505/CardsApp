@@ -15,7 +15,7 @@ function tokenVerifymiddleware(req,res,next){
                 msg : false,
             })
         }
-    } catch (error) {
+    } catch (error) {``
         res.status(401).json({
             msg : false,
         })

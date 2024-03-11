@@ -22,7 +22,10 @@ const detailsSchema = new mongoose.Schema({
     link1 : String,
     title2 : String,
     desc2 : String,
-    link2 : String
+    link2 : String,
+    github : String,
+    linkedin : String,
+    twitter : String
 })
 
 const User = mongoose.model('User',userSchema);

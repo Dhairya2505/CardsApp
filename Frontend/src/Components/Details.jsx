@@ -1,23 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Details() {
-  const [name, setName] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [gender, setGender] = useState("");
-  const [address, setAddress] = useState("");
-  const [education, setEducation] = useState("");
-  const [title1, setTitle1] = useState("");
-  const [title2, setTitle2] = useState("");
-  const [desc1, setdesc1] = useState("");
-  const [desc2, setdesc2] = useState("");
-  const [link1, setlink1] = useState("");
-  const [link2, setlink2] = useState("");
-  const [error, setError] = useState("");
-  const [github, setGithub] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [twitter, setTwitter] = useState("");
+  let [name, setName] = useState("");
+  let [mobile, setMobile] = useState("");
+  let [address, setAddress] = useState("");
+  let [education, setEducation] = useState("");
+  let [title1, setTitle1] = useState("");
+  let [title2, setTitle2] = useState("");
+  let [desc1, setdesc1] = useState("");
+  let [desc2, setdesc2] = useState("");
+  let [link1, setlink1] = useState("");
+  let [link2, setlink2] = useState("");
+  let [error, setError] = useState("");
+  let [github, setGithub] = useState("");
+  let [linkedin, setLinkedin] = useState("");
+  let [twitter, setTwitter] = useState("");
 
 
   const navigate = useNavigate();
@@ -32,8 +31,6 @@ export default function Details() {
       setError("*Fill name");
     } else if (mobile === "") {
       setError("*Fill mobile number");
-    } else if (gender === "") {
-      setError("*Select gender");
     } else if (address === "") {
       setError("*Fill address");
     } else if (education === "") {
@@ -44,7 +41,6 @@ export default function Details() {
       const data = {
         name: name,
         mobile: mobile,
-        gender: gender,
         address: address,
         education: education,
         title1: title1,
@@ -53,6 +49,9 @@ export default function Details() {
         title2: title2,
         desc2: desc2,
         link2: link2,
+        github : github,
+        linkedin : linkedin,
+        twitter : twitter
       };
       const response = await axios.post(
         "http://localhost:8001/api/details",
@@ -66,6 +65,40 @@ export default function Details() {
       navigate("/card");
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("CATIT");
+    if(!token){
+      navigate('/');
+    }
+    else{
+      async function getDetails(){
+        const response = await axios.get(
+          "http://localhost:8001/api/getDetails",
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        setName(response.data.name);
+        setMobile(response.data.mobile);
+        setAddress(response.data.address);
+        setEducation(response.data.education);
+        setTitle1(response.data.title1);
+        setTitle2(response.data.title2);
+        setdesc1(response.data.desc1);
+        setdesc2(response.data.desc2);
+        setlink1(response.data.link1);
+        setlink2(response.data.link2);
+        setGithub(response.data.github);
+        setLinkedin(response.data.linkedin);
+        setTwitter(response.data.twitter);
+
+      }
+      getDetails();
+    }
+  },[]);
 
   return (
     <div>
@@ -105,37 +138,6 @@ export default function Details() {
             </div>
           </div>
           <div className="p-1 mb-2">
-            <div className="">
-              <label className="text-xl cursor-pointer ">
-                Gender :{" "}
-              </label>
-            </div>
-            <div className="ml-12">
-              <input
-                type="radio"
-                name="gender"
-                id="Male"
-                value="Male"
-                onChange={(e) => setGender(e.target.value)}
-                className="cursor-pointer"
-              />
-              <label htmlFor="Male" className="cursor-pointer text-lg p-1">
-                Male
-              </label>
-              <input
-                type="radio"
-                name="gender"
-                id="Female"
-                value="Female"
-                onChange={(e) => setGender(e.target.value)}
-                className="cursor-pointer"
-              />
-              <label htmlFor="Female" className="cursor-pointer text-lg p-1">
-                Female
-              </label>
-            </div>
-          </div>
-          <div className="p-1 mb-2">
             <div>
               <label htmlFor="address" className="text-xl cursor-pointer">
                 Address :{" "}
@@ -169,7 +171,7 @@ export default function Details() {
           </div>
           <div className="p-1 mb-2">
             <div>
-              <label htmlFor="education" className="text-xl cursor-pointer">
+              <label htmlFor="Github" className="text-xl cursor-pointer">
                 Github Link :{" "}
               </label>
             </div>
@@ -177,7 +179,7 @@ export default function Details() {
               <input
                 type="text"
                 value={github}
-                id="education"
+                id="Github"
                 className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
                 onChange={(e) => setGithub(e.target.value)}
               />
@@ -185,7 +187,7 @@ export default function Details() {
           </div>
           <div className="p-1 mb-2">
             <div>
-              <label htmlFor="education" className="text-xl cursor-pointer">
+              <label htmlFor="Twitter" className="text-xl cursor-pointer">
                 Twitter Link :{" "}
               </label>
             </div>
@@ -193,7 +195,7 @@ export default function Details() {
               <input
                 type="text"
                 value={twitter}
-                id="education"
+                id="Twitter"
                 className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
                 onChange={(e) => setTwitter(e.target.value)}
               />
@@ -201,7 +203,7 @@ export default function Details() {
           </div>
           <div className="p-1 mb-2">
             <div>
-              <label htmlFor="education" className="text-xl cursor-pointer">
+              <label htmlFor="Linkedin" className="text-xl cursor-pointer">
                 Linkedin Link :{" "}
               </label>
             </div>
@@ -209,7 +211,7 @@ export default function Details() {
               <input
                 type="text"
                 value={linkedin}
-                id="education"
+                id="Linkedin"
                 className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
                 onChange={(e) => setLinkedin(e.target.value)}
               />
@@ -334,7 +336,7 @@ export default function Details() {
       </div>
 
       <div className="hidden lg:block bg-slate-300 rounded-xl border-4 border-dark-gray">
-        <div className="grid grid-cols-2 place-items-center">
+        <div className="grid grid-cols-2">
           
           <div className="col-span-1 p-12">
             <div className="text-4xl mb-10">Personal Details</div>
@@ -371,37 +373,6 @@ export default function Details() {
               </div>
             </div>
             <div className="p-1 mb-2">
-              <div className="">
-                <label className="text-xl cursor-pointer ">
-                  Gender :{" "}
-                </label>
-              </div>
-              <div className="ml-12">
-                <input
-                  type="radio"
-                  name="gender"
-                  id="male"
-                  value="Male"
-                  onChange={(e) => setGender(e.target.value)}
-                  className="cursor-pointer"
-                />
-                <label htmlFor="male" className="cursor-pointer text-lg p-1">
-                  Male
-                </label>
-                <input
-                  type="radio"
-                  name="gender"
-                  id="female"
-                  value="Female"
-                  onChange={(e) => setGender(e.target.value)}
-                  className="cursor-pointer"
-                />
-                <label htmlFor="female" className="cursor-pointer text-lg p-1">
-                  Female
-                </label>
-              </div>
-            </div>
-            <div className="p-1 mb-2">
               <div>
                 <label htmlFor="Address" className="text-xl cursor-pointer">
                   Address :{" "}
@@ -421,7 +392,7 @@ export default function Details() {
               <div>
                 <label htmlFor="Education" className="text-xl cursor-pointer">
                   Education :{" "}
-                </label>
+                </label>  
               </div>
               <div>
                 <input
@@ -430,6 +401,54 @@ export default function Details() {
                   id="Education"
                   className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
                   onChange={(e) => setEducation(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="p-1 mb-2">
+              <div>
+                <label htmlFor="github" className="text-xl cursor-pointer">
+                  Github Link :{" "}
+                </label>  
+              </div>
+              <div>
+                <input
+                  type="text"
+                  value={github}
+                  id="github"
+                  className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
+                  onChange={(e) => setGithub(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="p-1 mb-2">
+              <div>
+                <label htmlFor="linkedin" className="text-xl cursor-pointer">
+                  Linkedin Link :{" "}
+                </label>  
+              </div>
+              <div>
+                <input
+                  type="text"
+                  value={linkedin}
+                  id="linkedin"
+                  className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
+                  onChange={(e) => setLinkedin(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="p-1 mb-2">
+              <div>
+                <label htmlFor="twitter" className="text-xl cursor-pointer">
+                  Twitter Link :{" "}
+                </label>  
+              </div>
+              <div>
+                <input
+                  type="text"
+                  value={twitter}
+                  id="twitter"
+                  className="border-black border-2 rounded-lg bg-light-gray2 ml-5 p-0.5 w-60 cursor-pointer"
+                  onChange={(e) => setTwitter(e.target.value)}
                 />
               </div>
             </div>

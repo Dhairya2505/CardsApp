@@ -43,6 +43,16 @@ function Dashboard({component}){
                         <FaBars className="size-9"/>
                     </div>
                 </div>
+                <div className="hidden lg:block">
+                    <div className="flex justify-center">
+                        <button className="bg-blue-500 border-2 border-blue-950 rounded-lg text-xl p-2 m-3" onClick={() => navigate('/dashboard')}>
+                            Details
+                        </button>
+                        <button className="bg-blue-500 border-2 border-blue-950 rounded-lg text-xl p-2 m-3" onClick={() => navigate('/card')}>
+                            Card
+                        </button>
+                    </div>
+                </div>
                 <div className="flex justify-center mt-5">
                     {component}
                 </div>
